@@ -46,7 +46,7 @@ class Store {
 		this.setState({
 			...this.state,
 			prevCode: newCode,
-			list: [...this.state.list, { code: newCode, title: "Новая запись" }],
+			list: [...this.state.list, { code: newCode, title: 'Новая запись' }],
 		});
 	}
 
@@ -69,7 +69,11 @@ class Store {
 		this.setState({
 			...this.state,
 			list: this.state.list.map((item) => {
-				return { ...item, selected: item.code === code ? !item.selected : false };
+				return {
+					...item,
+					selected: item.code === code ? !item.selected : false,
+					selectedCount: item.code === code ? (item.selectedCount || 0) + 1 : item.selectedCount,
+				};
 			}),
 		});
 	}
