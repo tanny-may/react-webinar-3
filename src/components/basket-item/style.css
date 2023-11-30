@@ -1,0 +1,43 @@
+.BasketItem {
+    display: flex;
+    justify-content: space-between;
+    transition: background-color 1s;
+    align-items: center;
+    border-bottom: 1px dashed #ccc;
+}
+
+.BasketItem:first-child{
+    border-top: 1px dashed #ccc;
+}
+
+.BasketItem-left {
+    display: flex;
+    align-items: center;
+}
+
+.BasketItem-right {
+    display: flex;
+    align-items: center;
+}
+
+.BasketItem-code {
+    padding: 20px 10px 20px 20px;
+}
+
+.BasketItem-title {
+    padding: 20px 10px;
+}
+
+.BasketItem-price {
+    margin-right: 40px;
+}
+
+.BasketItem-count {
+    margin-right: 10px;
+}
+
+.BasketItem-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 20px 20px 10px;
+}

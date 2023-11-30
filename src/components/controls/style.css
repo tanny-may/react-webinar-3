@@ -2,4 +2,9 @@
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+  border-bottom: 1px dashed #ccc;
+}
+
+.Controls-div {
+  margin-right: 10px;
 }
