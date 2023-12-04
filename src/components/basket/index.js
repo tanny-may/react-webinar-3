@@ -49,7 +49,7 @@ Basket.propTypes = {
   onSetBasketVisible: PropTypes.func,
 };
 
-List.defaultProps = {
+Basket.defaultProps = {
   onDeleteItem: () => {},
   onSetBasketVisible: () => {},
 };
