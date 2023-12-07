@@ -11,11 +11,11 @@ function Pagination({ totalCount, currentPage, onClick }) {
     <div className={cn()}>
       {pages.map((pageNumber, i) =>
         pageNumber !== DOTS ? (
-          <button key={i} onClick={() => onClick(pageNumber)}>
+          <button className={currentPage=== pageNumber ? cn("button-active"): cn("button")} key={i} onClick={() => onClick(pageNumber)}>
             {pageNumber}
           </button>
         ) : (
-          DOTS
+          <span className={cn("dots")}>{DOTS}</span>
         )
       )}
     </div>
