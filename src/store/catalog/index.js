@@ -1,5 +1,6 @@
 import { codeGenerator } from "../../utils";
 import StoreModule from "../module";
+import { pageSize } from "../../const";
 
 class Catalog extends StoreModule {
   constructor(store, name) {
@@ -16,10 +17,9 @@ class Catalog extends StoreModule {
   }
 
   async load(currentPage) {
-    const limit = 20;
-    const skip = limit * (currentPage - 1);
+    const skip = pageSize * (currentPage - 1);
     const response = await fetch(
-      `/api/v1/articles?limit=${limit}&skip=${skip}&fields=items(_id, *),count`
+      `/api/v1/articles?limit=${pageSize}&skip=${skip}&fields=items(_id, *),count`
     );
     const json = await response.json();
     console.log(json);

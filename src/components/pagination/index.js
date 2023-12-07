@@ -1,11 +1,12 @@
 import { cn as bem } from "@bem-react/classname";
 import { useMemo } from "react";
+import { pageSize } from "../../const";
 import "./style.css";
 
 function Pagination({ totalCount, currentPage, onClick }) {
   const cn = bem("Pagination");
 
-  let pages = usePagination(totalCount, 20, currentPage);
+  let pages = usePagination(totalCount, pageSize, currentPage);
 
   return (
     <div className={cn()}>
