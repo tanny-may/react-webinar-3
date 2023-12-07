@@ -3,7 +3,7 @@ import BasketTool from "../basket-tool";
 import Head from "../head";
 import PageLayout from "../page-layout";
 import { cn as bem } from "@bem-react/classname";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
@@ -21,8 +21,14 @@ function Article() {
   }, [articleId]);
 
   let articleData = useSelector((state) => state.article.articleData);
-  console.log(articleData);
 
+  const callbacks = {
+    // Добавление в корзину
+    addToBasket: useCallback(
+      () => store.actions.basket.addToBasket(articleId),
+      [store, articleId]
+    ),
+  };
   return (
     <PageLayout>
         <div className={cn()}>
@@ -44,7 +50,7 @@ function Article() {
                 Цена: <b>{articleData.price} ₽</b>{" "}
                 </p>
                 
-                <button className={cn("button")}>Добавить</button>
+                <button className={cn("button")} onClick={callbacks.addToBasket}>Добавить</button>
             </div>           
         </div>
     </PageLayout>
