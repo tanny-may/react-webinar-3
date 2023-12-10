@@ -25,7 +25,9 @@ function BasketTool() {
   return (
     <div className={cn()}>
       <div>
-        <Link className={cn("main")} to="/">Главная</Link>
+        <Link className={cn("main")} to="/">
+          Главная
+        </Link>
       </div>
 
       <div className={cn("label")}>
@@ -39,9 +41,7 @@ function BasketTool() {
               })} / ${numberFormat(select.sum)} ₽`
             : `пусто`}
         </span>
-        <Link to="/">
-          <button onClick={callbacks.openModalBasket}>Перейти</button>
-        </Link>
+        <button onClick={callbacks.openModalBasket}>Перейти</button>
       </div>
     </div>
   );
