@@ -16,7 +16,7 @@ function Pagination({ totalCount, currentPage, onClick }) {
             {pageNumber}
           </button>
         ) : (
-          <span className={cn("dots")}>{DOTS}</span>
+          <span key={i} className={cn("dots")}>{DOTS}</span>
         )
       )}
     </div>
