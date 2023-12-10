@@ -1,3 +1,7 @@
 .Article-description{
     padding: 0 40px;
 }
+
+.Article-price {
+    font-size: 24px;
+}

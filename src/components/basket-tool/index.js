@@ -24,8 +24,8 @@ function BasketTool() {
   }));
   return (
     <div className={cn()}>
-      <div className={cn("main")}>
-        <Link to="/">Главная</Link>
+      <div>
+        <Link className={cn("main")} to="/">Главная</Link>
       </div>
 
       <div className={cn("label")}>

@@ -47,7 +47,7 @@ function Article() {
                 Год выпуска: <b>{articleData.edition}</b>{" "}
                 </p>
                 <p className={cn("price")}>
-                Цена: <b>{articleData.price} ₽</b>{" "}
+                <b> Цена: {articleData.price} ₽</b>{" "}
                 </p>
                 
                 <button className={cn("button")} onClick={callbacks.addToBasket}>Добавить</button>
