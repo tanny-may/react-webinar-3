@@ -19,7 +19,14 @@ function Main() {
 
   const token = useSelector((state) => state.user.token);
 
-  useInit(() => store.actions.catalog.initParams(), [], true);
+  useInit(
+    () => {
+      store.actions.catalog.initParams();
+      store.actions.user.getCurrentUser();
+    },
+    [],
+    true
+  );
 
   const callbacks = {
     onLogout: useCallback(() => store.actions.user.logout(), [store]),

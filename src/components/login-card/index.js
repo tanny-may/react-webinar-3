@@ -3,7 +3,7 @@ import Input from "../input";
 import { cn as bem } from "@bem-react/classname";
 import "./style.css";
 
-function LoginCard({ onLogin }) {
+function LoginCard({ onLogin, authError }) {
   const cn = bem("LoginCard");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +19,7 @@ function LoginCard({ onLogin }) {
         value={password}
         onChange={(value) => setPassword(value)}
       />
+      {authError && <p>{authError}</p>}
       <button onClick={() => onLogin({ login, password })}>Войти</button>
     </div>
   );

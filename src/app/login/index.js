@@ -12,13 +12,16 @@ function Login() {
   const store = useStore();
   const navigate = useNavigate();
 
-  const token = useSelector((state) => state.user.token);
+  const select = useSelector((state) => ({
+    token: state.user.token,
+    authError: state.user.errorMsg,
+  }));
 
   useEffect(() => {
-    if (token) {
+    if (select.token) {
       navigate("/");
     }
-  }, [token]);
+  }, [select.token]);
 
   const callbacks = {
     // Добавление в корзину
@@ -33,7 +36,7 @@ function Login() {
         <LocaleSelect />
       </Head>
       <Navigation />
-      <LoginCard onLogin={callbacks.onLogin} />
+      <LoginCard onLogin={callbacks.onLogin} authError={select.authError} />
     </PageLayout>
   );
 }
