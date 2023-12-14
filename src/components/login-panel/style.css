@@ -1,4 +1,14 @@
 .LoginPanel {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    height: 40px;
+}
+
+.LoginPanel-userName {
+    margin-right: 20px;
+}
+
+.LoginPanel-button {
+    margin-right: 20px;
 }

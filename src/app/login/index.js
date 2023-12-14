@@ -7,6 +7,8 @@ import { useCallback, useEffect } from "react";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import { useNavigate } from "react-router-dom";
+import LoginPanel from "../../components/login-panel";
+import useTranslate from "../../hooks/use-translate";
 
 function Login() {
   const store = useStore();
@@ -30,9 +32,11 @@ function Login() {
       [store]
     ),
   };
+  const { t } = useTranslate();
   return (
     <PageLayout>
-      <Head>
+         <LoginPanel/>
+      <Head title={t("title")}>
         <LocaleSelect />
       </Head>
       <Navigation />

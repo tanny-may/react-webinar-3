@@ -17,7 +17,10 @@ import useSelector from "../../hooks/use-selector";
 function Main() {
   const store = useStore();
 
-  const token = useSelector((state) => state.user.token);
+  const select = useSelector((state) => ({
+    token: state.user.token,
+    userInfo: state.user.userInfo,
+  }));
 
   useInit(
     () => {
@@ -36,7 +39,11 @@ function Main() {
 
   return (
     <PageLayout>
-      <LoginPanel token={token} onLogout={callbacks.onLogout}></LoginPanel>
+      <LoginPanel
+        userInfo={select.userInfo}
+        token={select.token}
+        onLogout={callbacks.onLogout}
+      ></LoginPanel>
       <Head title={t("title")}>
         <LocaleSelect />
       </Head>

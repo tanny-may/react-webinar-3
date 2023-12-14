@@ -10,17 +10,13 @@ function LoginCard({ onLogin, authError }) {
 
   return (
     <div className={cn()}>
-      <h1>Вход</h1>
+      <h2>Вход</h2>
       <label>Логин</label>
       <Input value={login} onChange={(value) => setLogin(value)} />
-      <label>Пароль</label>
-      <Input
-        type={"password"}
-        value={password}
-        onChange={(value) => setPassword(value)}
-      />
-      {authError && <p>{authError}</p>}
-      <button onClick={() => onLogin({ login, password })}>Войти</button>
+      <label className={cn('label')}>Пароль</label>
+      <Input type={"password"} value={password} onChange={(value) => setPassword(value)}/>
+      {authError && <p className={cn('error')}>{authError}</p>}
+      <button className={cn('button')} onClick={() => onLogin({ login, password })}>Войти</button>
     </div>
   );
 }
