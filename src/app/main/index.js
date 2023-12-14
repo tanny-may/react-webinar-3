@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import { memo, useCallback } from "react";
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
 import useInit from "../../hooks/use-init";
@@ -8,28 +8,34 @@ import Head from "../../components/head";
 import CatalogFilter from "../../containers/catalog-filter";
 import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
+import LoginPanel from "../../components/login-panel";
+import useSelector from "../../hooks/use-selector";
 
 /**
  * Главная страница - первичная загрузка каталога
  */
 function Main() {
-
   const store = useStore();
 
-  useInit(() => {
-    store.actions.catalog.initParams();
-  }, [], true);
+  const token = useSelector((state) => state.user.token);
 
-  const {t} = useTranslate();
+  useInit(() => store.actions.catalog.initParams(), [], true);
+
+  const callbacks = {
+    onLogout: useCallback(() => store.actions.user.logout(), [store]),
+  };
+
+  const { t } = useTranslate();
 
   return (
     <PageLayout>
-      <Head title={t('title')}>
-        <LocaleSelect/>
+      <LoginPanel token={token} onLogout={callbacks.onLogout}></LoginPanel>
+      <Head title={t("title")}>
+        <LocaleSelect />
       </Head>
-      <Navigation/>
-      <CatalogFilter/>
-      <CatalogList/>
+      <Navigation />
+      <CatalogFilter />
+      <CatalogList />
     </PageLayout>
   );
 }
