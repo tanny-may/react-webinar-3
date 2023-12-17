@@ -41,51 +41,37 @@ function CatalogFilter() {
 
   const options = {
     category: useMemo(() => {
-      let categories = [{ value: "all", title: "Все", _id: 0 }];
-      for (let item of select.categories) {
-        if (!item.parent) {
-          categories.push({
-            value: item._id,
-            title: item.title,
-            _id: item._id,
-            parent: item.parent,
-          });
+      let sourceCategories = [...select.categories];
+      let categories = [{ value: "all", title: "Все" }];
+
+      while (sourceCategories.length > 0) {
+        let newSource = [];
+        for (let item of sourceCategories) {
+          if (!item.parent) {
+            categories.push({
+              value: item._id,
+              title: item.title,
+              level: 0,
+            });
+          } else {
+            let parentIndex = categories.findIndex(
+              (el) => el.value === item.parent._id
+            );
+            if (parentIndex === -1) {
+              newSource.push(item);
+              continue;
+            }
+
+            let parent = categories[parentIndex];
+            categories.splice(parentIndex + 1, 0, {
+              value: item._id,
+              title: "- ".repeat(parent.level + 1) + item.title,
+              level: parent.level + 1,
+            });
+          }
+          sourceCategories = newSource;
         }
       }
-
-      for (let item of select.categories) {
-        if (item.parent) {
-          let parentIndex = categories.findIndex(
-            (el) => el._id == item.parent._id
-          );
-          if (parentIndex === -1) continue;
-          let parent = categories[parentIndex];
-          if (parent.parent) continue;
-          categories.splice(parentIndex + 1, 0, {
-            value: item._id,
-            title: "- " + item.title,
-            _id: item._id,
-            parent: item.parent,
-          });
-        }
-      }
-
-      for (let item of select.categories) {
-        if (item.parent) {
-          let parentIndex = categories.findIndex(
-            (el) => el._id == item.parent._id
-          );
-          let parent = categories[parentIndex];
-
-          if (!parent.parent) continue;
-          parentIndex = categories.findIndex((el) => el._id == parent._id);
-          categories.splice(parentIndex + 1, 0, {
-            value: item._id,
-            title: "- - " + item.title,
-          });
-        }
-      }
-
       return categories;
     }, [select.categories]),
     sort: useMemo(
