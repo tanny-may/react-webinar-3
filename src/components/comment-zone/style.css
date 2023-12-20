@@ -1,3 +1,7 @@
 .CommentZone {
-    padding: 0 0 34px 34px;
+    padding: 0 34px 34px 34px;
+}
+
+.CommentZone-list {
+    padding-left: 0;
 }

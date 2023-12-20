@@ -4,16 +4,24 @@
     align-items: flex-start;
 }
 
+.Comment-header {
+    display: flex;
+    margin-bottom: 0;
+}
+
 .Comment-header, .Comment-text {
     margin-bottom: 10px;
+    margin-top: 0;
 }
 
 .Comment-user {
     margin-right: 10px;
+    margin-bottom: 0;
 }
 
 .Comment-data {
     color: #666666;
+    margin-bottom: 0;
 }
 
 .Comment-button {

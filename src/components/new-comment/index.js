@@ -24,7 +24,7 @@ function NewComment() {
         <b>Новый комментарий</b>
       </p>
       <input className={cn("textarea")} type="text" placeholder="Текст"></input>
-      <button>Отправить</button>
+      <button className={cn("button")}>Отправить</button>
     </div>
   );
 }

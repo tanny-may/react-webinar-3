@@ -1,7 +1,9 @@
 .NewComment {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    width: -webkit-fill-available;
+  
 }
 
 .NewComment-text {
@@ -9,11 +11,16 @@
 }
 
 .NewComment-textarea {
-    width: 90%;
     margin-bottom: 10px;
     height: 60px;
+    box-sizing: border-box;
 }
 
 .NewComment-textarea::placeholder{
     transform: translateY(-20px);
+}
+
+.NewComment-button {
+    width: 84px;
+    margin-bottom: 30px;
 }

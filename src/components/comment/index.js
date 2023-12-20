@@ -30,12 +30,12 @@ function Comment({ item, comments, newCommentParent }) {
   return (
     <li className={cn("item")}>
       <div className={cn("header")}>
-        <span className={cn("user")}>
+        <p className={cn("user")}>
           <b>{item.author.profile.name}</b>
-        </span>
-        <span className={cn("data")}>{formatDate + " в " + formatTime}</span>
+        </p>
+        <p className={cn("data")}>{formatDate + " в " + formatTime}</p>
       </div>
-      <span className={cn("text")}>{item.text}</span>
+      <p className={cn("text")}>{item.text}</p>
       <button
         className={cn("button")}
         onClick={() =>
