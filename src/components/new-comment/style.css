@@ -1,0 +1,19 @@
+.NewComment {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.NewComment-text {
+    margin-bottom: 10px;
+}
+
+.NewComment-textarea {
+    width: 90%;
+    margin-bottom: 10px;
+    height: 60px;
+}
+
+.NewComment-textarea::placeholder{
+    transform: translateY(-20px);
+}

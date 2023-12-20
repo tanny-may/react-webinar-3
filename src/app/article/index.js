@@ -13,7 +13,7 @@ import TopHead from "../../containers/top-head";
 import { useDispatch, useSelector } from "react-redux";
 import shallowequal from "shallowequal";
 import articleActions from "../../store-redux/article/actions";
-import CommentMaker from "../../containers/comment-maker";
+import CommentZone from "../../components/comment-zone";
 
 function Article() {
   const store = useStore();
@@ -32,6 +32,7 @@ function Article() {
     (state) => ({
       article: state.article.data,
       comments: state.article.comments,
+      newCommentParent: state.article.newCommentParent,
       waiting: state.article.waiting,
     }),
     shallowequal
@@ -61,7 +62,11 @@ function Article() {
           t={t}
         />
       </Spinner>
-      <CommentMaker comments={select.comments} />
+      <CommentZone
+        articleId={params.id}
+        comments={select.comments}
+        newCommentParent={select.newCommentParent}
+      />
     </PageLayout>
   );
 }
