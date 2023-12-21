@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import articleActions from "../../store-redux/article/actions";
 import { useState } from "react";
+import { article } from "../../store/exports";
 
 function NewComment({ parentType, parentId }) {
   const cn = bem("NewComment");
@@ -16,11 +17,17 @@ function NewComment({ parentType, parentId }) {
   }));
 
   if (!select.session) {
-    return (
-      <p className={cn("desription")}>
-        <Link to="/login">Войдите</Link>, чтобы иметь возможность комментировать
-      </p>
-    );
+    if (parentType === 'article') {
+      return (
+        <p className={cn("desription")}>
+          <Link to="/login">Войдите</Link>, чтобы иметь возможность{" "} комментировать
+        </p>
+    )} else {
+      return (
+        <p className={cn("desription")}>
+          <Link to="/login">Войдите</Link>, чтобы иметь возможность{" "} ответить. <Link to="">Отмена</Link>
+        </p>
+    )}
   }
 
   return (
