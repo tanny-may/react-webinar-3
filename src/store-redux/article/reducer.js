@@ -27,6 +27,11 @@ function reducer(state = initialState, action) {
     case "article/new-comment-parent":
       return { ...state, newCommentParent: action.payload._id };
 
+    case "comment/create-success":
+      return {
+        ...state,
+        comments: [...state.comments, action.payload.newComment],
+      };
     default:
       // Нет изменений
       return state;

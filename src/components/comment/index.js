@@ -47,7 +47,9 @@ function Comment({ item, comments, newCommentParent }) {
       >
         Ответить
       </button>
-      {newCommentParent === item._id && <NewComment />}
+      {newCommentParent === item._id && (
+        <NewComment parentType={"comment"} parentId={item._id} />
+      )}
       {comments.length > 0 && (
         <ul>
           {comments

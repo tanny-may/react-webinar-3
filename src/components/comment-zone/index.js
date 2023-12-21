@@ -20,7 +20,9 @@ function CommentZone({ articleId, comments, newCommentParent }) {
     <div className={cn()}>
       <h2 className={cn("header")}>Комментарии ({comments.length})</h2>
       <ul className={cn("list")}>{commentItems}</ul>
-      {newCommentParent === articleId && <NewComment />}
+      {newCommentParent === articleId && (
+        <NewComment parentType={"article"} parentId={articleId} />
+      )}
     </div>
   );
 }
