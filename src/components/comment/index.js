@@ -2,6 +2,7 @@ import { cn as bem } from "@bem-react/classname";
 import "./style.css";
 import NewComment from "../new-comment";
 import { useDispatch } from "react-redux";
+import { article } from "../../store/exports";
 
 const months = [
   "января",
@@ -18,7 +19,7 @@ const months = [
   "декабря",
 ];
 
-function Comment({ item, comments, newCommentParent }) {
+function Comment({ item, comments, newCommentParent, articleId }) {
   const cn = bem("Comment");
   const dispatch = useDispatch();
 
@@ -48,7 +49,7 @@ function Comment({ item, comments, newCommentParent }) {
         Ответить
       </button>
       {newCommentParent === item._id && (
-        <NewComment parentType={"comment"} parentId={item._id} />
+        <NewComment parentType={"comment"} parentId={item._id} articleId={articleId}/>
       )}
       {comments.length > 0 && (
         <ul>
@@ -62,6 +63,7 @@ function Comment({ item, comments, newCommentParent }) {
                   (comment) => comment.parent._id !== item._id
                 )}
                 newCommentParent={newCommentParent}
+                articleId={articleId}
               />
             ))}
         </ul>

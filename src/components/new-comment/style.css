@@ -16,7 +16,12 @@
     padding: 0 0 35px 0;
 }
 
+.NewComment-twoButtons {
+    display: flex;
+}
+
 .NewComment-button {
     width: 84px;
     margin-bottom: 30px;
+    margin-right: 10px;
 }

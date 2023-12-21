@@ -13,6 +13,7 @@ function CommentZone({ articleId, comments, newCommentParent }) {
         key={item._id}
         comments={comments.filter((item) => item.parent._type === "comment")}
         newCommentParent={newCommentParent}
+        articleId={articleId}
       />
     ));
 
@@ -21,7 +22,7 @@ function CommentZone({ articleId, comments, newCommentParent }) {
       <h2 className={cn("header")}>Комментарии ({comments.length})</h2>
       <ul className={cn("list")}>{commentItems}</ul>
       {newCommentParent === articleId && (
-        <NewComment parentType={"article"} parentId={articleId} />
+        <NewComment parentType={"article"} parentId={articleId} articleId={articleId}/>
       )}
     </div>
   );

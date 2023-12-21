@@ -5,9 +5,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import articleActions from "../../store-redux/article/actions";
 import { useState } from "react";
-import { article } from "../../store/exports";
 
-function NewComment({ parentType, parentId }) {
+function NewComment({ parentType, parentId, articleId }) {
   const cn = bem("NewComment");
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
@@ -17,17 +16,21 @@ function NewComment({ parentType, parentId }) {
   }));
 
   if (!select.session) {
-    if (parentType === 'article') {
+    if (parentType === "article") {
       return (
         <p className={cn("desription")}>
-          <Link to="/login">Войдите</Link>, чтобы иметь возможность{" "} комментировать
+          <Link to="/login">Войдите</Link>, чтобы иметь возможность{" "}
+          комментировать
         </p>
-    )} else {
+      );
+    } else {
       return (
         <p className={cn("desription")}>
-          <Link to="/login">Войдите</Link>, чтобы иметь возможность{" "} ответить. <Link to="">Отмена</Link>
+          <Link to="/login">Войдите</Link>, чтобы иметь возможность ответить.{" "}
+          <Link to="">Отмена</Link>
         </p>
-    )}
+      );
+    }
   }
 
   return (
@@ -42,20 +45,35 @@ function NewComment({ parentType, parentId }) {
         onInput={(event) => setValue(event.target.value)}
         value={value}
       ></input>
-      <button
-        className={cn("button")}
-        onClick={() => {
-          dispatch(
-            articleActions.createComment(value, {
-              _type: parentType,
-              _id: parentId,
+      <div className={cn("twoButtons")}>
+        <button
+          className={cn("button")}
+          onClick={() => {
+            dispatch(
+              articleActions.createComment(value, {
+                _type: parentType,
+                _id: parentId,
+              })
+            );
+            setValue("");
+          }}
+        >
+          Отправить
+        </button>
+
+        {parentType === 'comment' &&
+        <button
+          onClick={() =>
+            dispatch({
+              type: "article/new-comment-parent",
+              payload: { _id: articleId },
             })
-          );
-          setValue("");
-        }}
-      >
-        Отправить
-      </button>
+          }
+          className={cn("button")}
+        >
+          Отмена
+        </button>}
+      </div>
     </div>
   );
 }
