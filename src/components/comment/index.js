@@ -61,16 +61,9 @@ function Comment({
       >
         Ответить
       </button>
-      {newCommentParent === item._id && (
-        <NewComment
-          parentType={"comment"}
-          parentId={item._id}
-          articleId={articleId}
-        />
-      )}
-      {comments.length > 0 && (
-        <ul style={{ padding: level < 3 ? "40" : "0" }}>
-          {comments
+      <ul style={{ padding: level < 3 ? "40" : "0" }}>
+        {comments.length > 0 &&
+          comments
             .filter((comment) => comment.parent._id === item._id)
             .map((comment) => (
               <Comment
@@ -85,8 +78,14 @@ function Comment({
                 currentUserID={currentUserID}
               />
             ))}
-        </ul>
-      )}
+        {newCommentParent === item._id && (
+          <NewComment
+            parentType={"comment"}
+            parentId={item._id}
+            articleId={articleId}
+          />
+        )}
+      </ul>
     </li>
   );
 }
