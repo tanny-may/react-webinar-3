@@ -83,6 +83,7 @@ function Comment({
             parentType={"comment"}
             parentId={item._id}
             articleId={articleId}
+            parentAuthorName={item.author.profile.name}
           />
         )}
       </ul>

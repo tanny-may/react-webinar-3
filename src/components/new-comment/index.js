@@ -6,10 +6,10 @@ import { useDispatch } from "react-redux";
 import articleActions from "../../store-redux/article/actions";
 import { useState } from "react";
 
-function NewComment({ parentType, parentId, articleId }) {
+function NewComment({ parentType, parentId, articleId, parentAuthorName }) {
   const cn = bem("NewComment");
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(parentType === 'article' ? "Текст" : `Мой ответ для ${parentAuthorName}`);
 
   const select = useSelector((state) => ({
     session: state.session.exists,
@@ -41,7 +41,6 @@ function NewComment({ parentType, parentId, articleId }) {
       <input
         className={cn("textarea")}
         type="text"
-        placeholder="Текст"
         onInput={(event) => setValue(event.target.value)}
         value={value}
       ></input>
