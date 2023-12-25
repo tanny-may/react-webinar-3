@@ -56,6 +56,10 @@ function NewComment({ parentType, parentId, articleId }) {
                 _id: parentId,
               })
             );
+            dispatch({
+              type: "article/new-comment-parent",
+              payload: { _id: articleId },
+            });
             setValue("");
           }}
         >
