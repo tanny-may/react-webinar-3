@@ -12,6 +12,7 @@
 .Comment-header, .Comment-text {
     margin-bottom: 10px;
     margin-top: 0;
+    word-break: break-all;
 }
 
 .Comment-user {
