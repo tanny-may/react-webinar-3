@@ -19,7 +19,7 @@ const months = [
   "декабря",
 ];
 
-function Comment({ item, comments, newCommentParent, articleId }) {
+function Comment({ item, comments, newCommentParent, articleId, level = 0 }) {
   const cn = bem("Comment");
   const dispatch = useDispatch();
 
@@ -49,10 +49,14 @@ function Comment({ item, comments, newCommentParent, articleId }) {
         Ответить
       </button>
       {newCommentParent === item._id && (
-        <NewComment parentType={"comment"} parentId={item._id} articleId={articleId}/>
+        <NewComment
+          parentType={"comment"}
+          parentId={item._id}
+          articleId={articleId}
+        />
       )}
       {comments.length > 0 && (
-        <ul>
+        <ul style={{ padding: level < 3 ? "40" : "0" }}>
           {comments
             .filter((comment) => comment.parent._id === item._id)
             .map((comment) => (
@@ -64,6 +68,7 @@ function Comment({ item, comments, newCommentParent, articleId }) {
                 )}
                 newCommentParent={newCommentParent}
                 articleId={articleId}
+                level={level + 1}
               />
             ))}
         </ul>
