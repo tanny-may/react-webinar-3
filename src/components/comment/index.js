@@ -19,7 +19,14 @@ const months = [
   "декабря",
 ];
 
-function Comment({ item, comments, newCommentParent, articleId, level = 0 }) {
+function Comment({
+  item,
+  comments,
+  newCommentParent,
+  articleId,
+  currentUserID,
+  level = 0,
+}) {
   const cn = bem("Comment");
   const dispatch = useDispatch();
 
@@ -32,7 +39,13 @@ function Comment({ item, comments, newCommentParent, articleId, level = 0 }) {
     <li className={cn("item")}>
       <div className={cn("header")}>
         <p className={cn("user")}>
-          <b>{item.author.profile.name}</b>
+          <b
+            style={{
+              color: currentUserID === item.author._id ? "#666666" : "#000000",
+            }}
+          >
+            {item.author.profile.name}
+          </b>
         </p>
         <p className={cn("data")}>{formatDate + " в " + formatTime}</p>
       </div>
@@ -69,6 +82,7 @@ function Comment({ item, comments, newCommentParent, articleId, level = 0 }) {
                 newCommentParent={newCommentParent}
                 articleId={articleId}
                 level={level + 1}
+                currentUserID={currentUserID}
               />
             ))}
         </ul>

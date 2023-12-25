@@ -3,7 +3,7 @@ import Comment from "../comment";
 import "./style.css";
 import NewComment from "../new-comment";
 
-function CommentZone({ articleId, comments, newCommentParent }) {
+function CommentZone({ articleId, comments, newCommentParent, currentUserID }) {
   const cn = bem("CommentZone");
   const commentItems = comments
     .filter((item) => item.parent._type === "article")
@@ -14,6 +14,7 @@ function CommentZone({ articleId, comments, newCommentParent }) {
         comments={comments.filter((item) => item.parent._type === "comment")}
         newCommentParent={newCommentParent}
         articleId={articleId}
+        currentUserID={currentUserID}
       />
     ));
 

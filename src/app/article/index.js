@@ -10,10 +10,11 @@ import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import LocaleSelect from "../../containers/locale-select";
 import TopHead from "../../containers/top-head";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector as useSelectorRedux } from "react-redux";
 import shallowequal from "shallowequal";
 import articleActions from "../../store-redux/article/actions";
 import CommentZone from "../../components/comment-zone";
+import useSelector from "../../hooks/use-selector";
 
 function Article() {
   const store = useStore();
@@ -28,7 +29,7 @@ function Article() {
     dispatch(articleActions.load(params.id));
   }, [params.id]);
 
-  const select = useSelector(
+  const select = useSelectorRedux(
     (state) => ({
       article: state.article.data,
       comments: state.article.comments,
@@ -38,6 +39,7 @@ function Article() {
     shallowequal
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
 
+  const currentUserID = useSelector((state) => state.session.user._id);
   const { t } = useTranslate();
 
   const callbacks = {
@@ -66,6 +68,7 @@ function Article() {
         articleId={params.id}
         comments={select.comments}
         newCommentParent={select.newCommentParent}
+        currentUserID={currentUserID}
       />
     </PageLayout>
   );
