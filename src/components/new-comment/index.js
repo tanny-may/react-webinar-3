@@ -49,6 +49,7 @@ function NewComment({ parentType, parentId, articleId }) {
         <button
           className={cn("button")}
           onClick={() => {
+            if (!value.trim()) return;
             dispatch(
               articleActions.createComment(value, {
                 _type: parentType,
@@ -61,18 +62,19 @@ function NewComment({ parentType, parentId, articleId }) {
           Отправить
         </button>
 
-        {parentType === 'comment' &&
-        <button
-          onClick={() =>
-            dispatch({
-              type: "article/new-comment-parent",
-              payload: { _id: articleId },
-            })
-          }
-          className={cn("button")}
-        >
-          Отмена
-        </button>}
+        {parentType === "comment" && (
+          <button
+            onClick={() =>
+              dispatch({
+                type: "article/new-comment-parent",
+                payload: { _id: articleId },
+              })
+            }
+            className={cn("button")}
+          >
+            Отмена
+          </button>
+        )}
       </div>
     </div>
   );
