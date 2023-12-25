@@ -19,14 +19,14 @@ function NewComment({ parentType, parentId, articleId }) {
     if (parentType === "article") {
       return (
         <p className={cn("desription")}>
-          <Link to="/login">Войдите</Link>, чтобы иметь возможность{" "}
+          <Link to="/login" state={{ back: `/articles/${articleId}` }} >Войдите</Link>, чтобы иметь возможность{" "}
           комментировать
         </p>
       );
     } else {
       return (
         <p className={cn("desription")}>
-          <Link to="/login">Войдите</Link>, чтобы иметь возможность ответить.{" "}
+          <Link to="/login" state={{ back: `/articles/${articleId}` }} >Войдите</Link>, чтобы иметь возможность ответить.{" "}
           <Link to="">Отмена</Link>
         </p>
       );
