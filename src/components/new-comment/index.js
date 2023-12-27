@@ -14,6 +14,14 @@ function NewComment({ parentType, parentId, articleId, parentAuthorName }) {
   );
 
   const ref = useRef();
+  useEffect(() => {
+    if (parentType === "comment") {
+      window.scrollTo({
+        top: ref.current.offsetTop - document.documentElement.clientHeight / 2,
+        behavior: "smooth",
+      });
+    }
+  }, []);
 
   const select = useSelector((state) => ({
     session: state.session.exists,
@@ -31,7 +39,7 @@ function NewComment({ parentType, parentId, articleId, parentAuthorName }) {
       );
     } else {
       return (
-        <p className={cn("desription")}>
+        <p ref={ref} className={cn("desription")}>
           <Link to="/login" state={{ back: `/articles/${articleId}` }}>
             Войдите
           </Link>
@@ -41,14 +49,6 @@ function NewComment({ parentType, parentId, articleId, parentAuthorName }) {
     }
   }
 
-  useEffect(() => {
-    if (parentType === "comment") {
-      window.scrollTo({
-        top: ref.current.offsetTop - document.documentElement.clientHeight / 2,
-        behavior: "smooth",
-      });
-    }
-  }, []);
 
   return (
     <div ref={ref} className={cn()}>
