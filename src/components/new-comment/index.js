@@ -4,12 +4,16 @@ import useSelector from "../../hooks/use-selector";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import articleActions from "../../store-redux/article/actions";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function NewComment({ parentType, parentId, articleId, parentAuthorName }) {
   const cn = bem("NewComment");
   const dispatch = useDispatch();
-  const [value, setValue] = useState(parentType === 'article' ? "Текст" : `Мой ответ для ${parentAuthorName}`);
+  const [value, setValue] = useState(
+    parentType === "article" ? "Текст" : `Мой ответ для ${parentAuthorName}`
+  );
+
+  const ref = useRef();
 
   const select = useSelector((state) => ({
     session: state.session.exists,
@@ -19,22 +23,35 @@ function NewComment({ parentType, parentId, articleId, parentAuthorName }) {
     if (parentType === "article") {
       return (
         <p className={cn("desription")}>
-          <Link to="/login" state={{ back: `/articles/${articleId}` }} >Войдите</Link>, чтобы иметь возможность{" "}
-          комментировать
+          <Link to="/login" state={{ back: `/articles/${articleId}` }}>
+            Войдите
+          </Link>
+          , чтобы иметь возможность комментировать
         </p>
       );
     } else {
       return (
         <p className={cn("desription")}>
-          <Link to="/login" state={{ back: `/articles/${articleId}` }} >Войдите</Link>, чтобы иметь возможность ответить.{" "}
-          <Link to="">Отмена</Link>
+          <Link to="/login" state={{ back: `/articles/${articleId}` }}>
+            Войдите
+          </Link>
+          , чтобы иметь возможность ответить. <Link to="">Отмена</Link>
         </p>
       );
     }
   }
 
+  useEffect(() => {
+    if (parentType === "comment") {
+      window.scrollTo({
+        top: ref.current.offsetTop - document.documentElement.clientHeight / 2,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
   return (
-    <div className={cn()}>
+    <div ref={ref} className={cn()}>
       <p className={cn("text")}>
         <b>Новый комментарий</b>
       </p>
